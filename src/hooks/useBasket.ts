@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import type { DeliveryRule } from "../types/DeliveryRule";
 import type { Product } from "../types/Product";
-import { calculateBasketTotal } from "../helpers/calculateBasket";
+import { calculateBasketData } from "../helpers/calculateBasketData";
 import type { Offer } from "../types/Offer";
 import OfferProcessor, { OfferStrategies } from "../helpers/OfferProcessor";
 
@@ -24,9 +24,9 @@ export function useBasket(catalogue: Product[], offers: Offer[], deliveryRules: 
     });
   };
 
-  const total = useMemo(
+  const { total, deliveryFee, subtotal, discount } = useMemo(
     () =>
-      calculateBasketTotal({
+      calculateBasketData({
         items,
         catalogue,
         deliveryRules,
@@ -36,5 +36,5 @@ export function useBasket(catalogue: Product[], offers: Offer[], deliveryRules: 
     [items, catalogue, deliveryRules, offers]
   );
 
-  return { items, total, add, remove };
+  return { items, total, add, remove, subtotal, discount, deliveryFee };
 }
