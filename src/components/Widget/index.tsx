@@ -6,8 +6,8 @@ interface Props {
   title: string;
   price: number;
   imageSrc: string;
-  onAddButtonPress?: () => void;
-  onRemoveButtonPress?: () => void;
+  onAddButtonPress: () => void;
+  onRemoveButtonPress: () => void;
 }
 
 const Widget = ({ className, title, price, onAddButtonPress, onRemoveButtonPress, imageSrc }: Props) => (
@@ -17,10 +17,10 @@ const Widget = ({ className, title, price, onAddButtonPress, onRemoveButtonPress
       <h3 className="font-medium text-xl mb-1">{title}</h3>
       <p className="text-black">${price.toFixed(2)}</p>
       <div className="flex gap-2 mt-4">
-        <Button className="mt-2 inline-flex" onClick={onAddButtonPress}>
+        <Button className="mt-2 inline-flex" onPress={onAddButtonPress}>
           Add
         </Button>
-        <Button variant="secondary" className="mt-2 inline-flex" onClick={onRemoveButtonPress}>
+        <Button variant="secondary" className="mt-2 inline-flex" onPress={onRemoveButtonPress}>
           Remove
         </Button>
       </div>
