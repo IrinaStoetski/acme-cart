@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <div className="grid xl:grid-cols-[2fr_1fr] gap-3 xl:gap-8 p-4 xl:p-8">
-        <Catalogue addProduct={add} removeProduct={remove} items={CATALOGUE} />
+        <Catalogue onAddButtonPress={add} items={CATALOGUE} />
         <div className="flex flex-col xl:gap-2 gap-12">
           <SpecialOffers data={SPECIAL_OFFERS_CONTENT} />
           <Basket
