@@ -1,5 +1,5 @@
 import { Button, Disclosure, DisclosurePanel, Heading } from "react-aria-components";
-
+import { ChevronDown } from "lucide-react";
 interface Props {
   id: string;
   title: string;
@@ -13,18 +13,13 @@ const AccordionItem = ({ id, title, children }: Props) => (
         <Heading level={3} className="m-0">
           <Button
             slot="trigger"
-            className="flex w-full items-center justify-between p-4 text-left font-semibold text-gray-700 outline-none hover:bg-gray-50 focus-visible:ring-2 ring-inset ring-blue-500 transition-colors"
+            className="flex w-full cursor-pointer items-center justify-between p-4 text-left font-semibold text-gray-700 outline-none hover:bg-gray-50 focus-visible:ring-2 ring-inset ring-blue-500 transition-colors"
           >
             {title}
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
-            >
-              <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ChevronDown
+              size={24}
+              className={`text-gray-400 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
+            />
           </Button>
         </Heading>
         <DisclosurePanel

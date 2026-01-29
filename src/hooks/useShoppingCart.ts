@@ -4,11 +4,17 @@ import type { Product } from "../types/Product";
 import { calculateBasketData } from "../helpers/calculateBasketData";
 import type { Offer } from "../types/Offer";
 
-export function useBasket(catalogue: Product[], offers: Offer[], deliveryRules: DeliveryRule[]) {
+type Params = {
+  catalog: Product[];
+  offers: Offer[];
+  deliveryRules: DeliveryRule[];
+};
+
+export function useShoppingCart({ catalog, offers, deliveryRules }: Params) {
   const [items, setItems] = useState<Product[]>([]);
 
   const add = (code: string) => {
-    const product = catalogue.find((p) => p.code === code);
+    const product = catalog.find((p) => p.code === code);
 
     if (product) {
       setItems((prev) => [...prev, product]);
@@ -27,11 +33,11 @@ export function useBasket(catalogue: Product[], offers: Offer[], deliveryRules: 
     () =>
       calculateBasketData({
         items,
-        catalogue,
+        catalog,
         deliveryRules,
         offers,
       }),
-    [items, catalogue, deliveryRules, offers]
+    [items, catalog, deliveryRules, offers]
   );
 
   return { items, total, add, remove, subtotal, discount, deliveryFee };

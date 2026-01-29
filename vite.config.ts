@@ -8,8 +8,13 @@ export default defineConfig({
     tailwindcss(),
     react({
       babel: {
-        plugins: [['babel-plugin-react-compiler']],
+        plugins: [["babel-plugin-react-compiler"]],
       },
     }),
   ],
-})
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./src/test/setup.ts"],
+  },
+});
