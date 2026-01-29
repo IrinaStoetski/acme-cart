@@ -6,7 +6,7 @@ import { CATALOGUE, DELIVERY_RULES, OFFERS, SPECIAL_OFFERS_CONTENT } from "./con
 import { useBasket } from "./hooks/useBasket";
 
 function App() {
-  const { items, add, remove, total: basketTotal, deliveryFee } = useBasket(CATALOGUE, OFFERS, DELIVERY_RULES);
+  const { items, add, remove, total, discount, deliveryFee, subtotal } = useBasket(CATALOGUE, OFFERS, DELIVERY_RULES);
 
   return (
     <>
@@ -15,10 +15,12 @@ function App() {
         <div className="flex flex-col xl:gap-2 gap-12">
           <SpecialOffers data={SPECIAL_OFFERS_CONTENT} />
           <Basket
+            subtotal={subtotal}
             deliveryFee={deliveryFee}
+            discount={discount}
             className="flex-1"
             items={items}
-            total={basketTotal}
+            total={total}
             onAddItem={add}
             onRemoveItem={remove}
           />

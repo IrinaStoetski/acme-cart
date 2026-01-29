@@ -3,7 +3,6 @@ import type { DeliveryRule } from "../types/DeliveryRule";
 import type { Product } from "../types/Product";
 import { calculateBasketData } from "../helpers/calculateBasketData";
 import type { Offer } from "../types/Offer";
-import OfferProcessor, { OfferStrategies } from "../helpers/OfferProcessor";
 
 export function useBasket(catalogue: Product[], offers: Offer[], deliveryRules: DeliveryRule[]) {
   const [items, setItems] = useState<Product[]>([]);
@@ -31,7 +30,6 @@ export function useBasket(catalogue: Product[], offers: Offer[], deliveryRules: 
         catalogue,
         deliveryRules,
         offers,
-        offerProcessor: new OfferProcessor(OfferStrategies),
       }),
     [items, catalogue, deliveryRules, offers]
   );

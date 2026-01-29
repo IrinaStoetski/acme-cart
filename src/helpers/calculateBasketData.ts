@@ -1,35 +1,32 @@
 import type { DeliveryRule } from "../types/DeliveryRule";
 import type { Offer } from "../types/Offer";
 import type { Product } from "../types/Product";
-import OfferProcessor from "./OfferProcessor";
+import { calculateDiscountForOffer } from "./calculateDiscountForOffer";
 
 type Params = {
   items: Product[];
   catalogue: Product[];
   deliveryRules: DeliveryRule[];
-  offerProcessor: OfferProcessor;
   offers: Offer[];
 };
 
-export const calculateBasketData = ({ items, catalogue, deliveryRules, offerProcessor, offers }: Params) => {
+export const calculateBasketData = ({ items, catalogue, deliveryRules, offers }: Params) => {
   const subtotal = items.reduce((sum, product) => {
     const catalogProduct = catalogue.find((p) => p.code === product.code);
 
     return sum + (catalogProduct?.price || 0);
   }, 0);
 
-  const discount = offers.reduce((total, offer) => total + offerProcessor.calculateDiscount(items, offer), 0);
-  const total = subtotal - discount;
-
+  const totalDiscount = offers.reduce((total, offer) => total + calculateDiscountForOffer(items, offer), 0);
+  const discountedSubtotal = subtotal - totalDiscount;
+  const sortedRules = [...deliveryRules].sort((a, b) => b.amountSpent - a.amountSpent);
   const deliveryFee =
-    items.length === 0
-      ? 0
-      : deliveryRules.sort((a, b) => b.amountSpent - a.amountSpent).find((rule) => total >= rule.amountSpent)?.fee || 0;
+    items.length === 0 ? 0 : sortedRules.find((rule) => discountedSubtotal >= rule.amountSpent)?.fee || 0;
 
   return {
     subtotal,
-    discount,
+    discount: totalDiscount,
     deliveryFee,
-    total: total + deliveryFee,
+    total: discountedSubtotal + deliveryFee,
   };
 };

@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import Button from "../ui/Button";
+import { formatPrice } from "../../helpers/formatPrice";
 
 interface Props {
   className?: string;
@@ -14,7 +15,7 @@ const Widget = ({ className, title, price, onAddButtonPress, imageSrc }: Props) 
     <img src={imageSrc} alt={title} width={120} height={120} className="my-2 rounded-md aspect-square" />
     <div className="flex flex-col ml-4 mt-1">
       <h3 className="font-medium text-xl mb-1">{title}</h3>
-      <p className="text-black">${price.toFixed(2)}</p>
+      <p className="text-black">{formatPrice(price)}</p>
       <div className="flex gap-2 mt-4">
         <Button className="mt-2 inline-flex" onPress={onAddButtonPress}>
           Add
