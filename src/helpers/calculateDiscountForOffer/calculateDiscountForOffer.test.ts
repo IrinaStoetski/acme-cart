@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { calculateDiscountForOffer } from "./calculateDiscountForOffer";
-import type { Product } from "../types/Product";
-import type { Offer } from "../types/Offer";
+import type { Product } from "../../types/Product";
+import type { Offer } from "../../types/Offer";
 
 describe("calculateDiscountForOffer", () => {
   const catalogue: Product[] = [
