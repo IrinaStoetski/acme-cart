@@ -5,14 +5,14 @@ import { calculateDiscountForOffer } from "./calculateDiscountForOffer";
 
 type Params = {
   items: Product[];
-  catalogue: Product[];
+  catalog: Product[];
   deliveryRules: DeliveryRule[];
   offers: Offer[];
 };
 
-export const calculateBasketData = ({ items, catalogue, deliveryRules, offers }: Params) => {
+export const calculateBasketData = ({ items, catalog, deliveryRules, offers }: Params) => {
   const subtotal = items.reduce((sum, product) => {
-    const catalogProduct = catalogue.find((p) => p.code === product.code);
+    const catalogProduct = catalog.find((p) => p.code === product.code);
 
     return sum + (catalogProduct?.price || 0);
   }, 0);

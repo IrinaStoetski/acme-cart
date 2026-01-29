@@ -6,7 +6,7 @@ import type { DeliveryRule } from "../types/DeliveryRule";
 import type { Offer } from "../types/Offer";
 
 describe("calculateBasketData", () => {
-  const catalogue: Product[] = [
+  const catalog: Product[] = [
     { code: "R01", name: "Red Widget", price: 3295, image: "" },
     { code: "G01", name: "Green Widget", price: 2495, image: "" },
     { code: "B01", name: "Blue Widget", price: 795, image: "" },
@@ -21,7 +21,7 @@ describe("calculateBasketData", () => {
   it("should return zeros for an empty basket", () => {
     const result = calculateBasketData({
       items: [],
-      catalogue,
+      catalog,
       deliveryRules,
       offers: [],
     });
@@ -36,8 +36,8 @@ describe("calculateBasketData", () => {
 
   it("should calculate correctly for a single item with no offers", () => {
     const result = calculateBasketData({
-      items: [catalogue[0]],
-      catalogue,
+      items: [catalog[0]],
+      catalog,
       deliveryRules,
       offers: [],
     });
@@ -50,8 +50,8 @@ describe("calculateBasketData", () => {
 
   it("should calculate correctly for multiple items with no offers", () => {
     const result = calculateBasketData({
-      items: [catalogue[1], catalogue[2]],
-      catalogue,
+      items: [catalog[1], catalog[2]],
+      catalog,
       deliveryRules,
       offers: [],
     });
@@ -62,12 +62,12 @@ describe("calculateBasketData", () => {
   });
 
   it("should apply discounts correctly", () => {
-    const items = [catalogue[0], catalogue[0]];
+    const items = [catalog[0], catalog[0]];
     const offers: Offer[] = [{ productCode: "R01", type: "BOGO", value: 0.5 }];
 
     const result = calculateBasketData({
       items,
-      catalogue,
+      catalog,
       deliveryRules,
       offers,
     });
@@ -80,8 +80,8 @@ describe("calculateBasketData", () => {
 
   it("should apply free delivery for subtotal >= 9000", () => {
     const result = calculateBasketData({
-      items: [catalogue[0], catalogue[0], catalogue[0]],
-      catalogue,
+      items: [catalog[0], catalog[0], catalog[0]],
+      catalog,
       deliveryRules,
       offers: [],
     });
@@ -93,8 +93,8 @@ describe("calculateBasketData", () => {
 
   it("should apply mid-tier delivery fee for subtotal >= 5000 and < 9000", () => {
     const result = calculateBasketData({
-      items: [catalogue[0], catalogue[1]],
-      catalogue,
+      items: [catalog[0], catalog[1]],
+      catalog,
       deliveryRules,
       offers: [],
     });
