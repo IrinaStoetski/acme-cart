@@ -23,12 +23,12 @@ export const Basket = ({ items, total, deliveryFee, onRemoveItem, onAddItem }: P
   });
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 mt-4 flex flex-col items-end">
+    <div className="border border-gray-300 rounded-lg p-4 mt-4">
       <h2 className="text-2xl w-full font-semibold mb-8 text-center">Your shopping cart</h2>
       {items.length === 0 ? (
         <EmptyState />
       ) : (
-        <>
+        <div className="w-full h-full flex flex-col items-between">
           <ul className="w-full">
             {Object.values(itemsMap).map((item) => (
               <li
@@ -45,19 +45,21 @@ export const Basket = ({ items, total, deliveryFee, onRemoveItem, onAddItem }: P
               </li>
             ))}
           </ul>
-          <div className="flex flex-col gap-2 mt-4">
-            <div className="subtotal">
-              <span className="font-semibold">Subtotal:</span> ${total - deliveryFee}
+          <div className="flex flex-col items-end">
+            <div className="flex flex-col gap-2 mt-4">
+              <div className="subtotal">
+                <span className="font-semibold">Subtotal:</span> ${total - deliveryFee}
+              </div>
+              <div className="delivery">
+                <span className="font-semibold">Delivery:</span> ${deliveryFee}
+              </div>
+              <div className="total">
+                <span className="font-semibold">Total:</span> ${total}
+              </div>
             </div>
-            <div className="delivery">
-              <span className="font-semibold">Delivery:</span> ${deliveryFee}
-            </div>
-            <div className="total">
-              <span className="font-semibold">Total:</span> ${total}
-            </div>
+            <Button className="mt-5">Proceed to checkout</Button>
           </div>
-          <Button className="mt-5">Proceed to checkout</Button>
-        </>
+        </div>
       )}
     </div>
   );
