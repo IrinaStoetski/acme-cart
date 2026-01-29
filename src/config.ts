@@ -22,4 +22,15 @@ const OFFERS: Offer[] = [
   },
 ];
 
-export { CATALOGUE, DELIVERY_RULES, OFFERS };
+const SPECIAL_OFFERS_CONTENT: { title: string; description: string }[] = [
+  {
+    title: "Buy One Get One 50% off on Red Widgets!",
+    description: "Only for 2 weeks! Buy one Red Widget and the second with 50% off.",
+  },
+  {
+    title: "The more you buy, the more you save!",
+    description: "Spend over $50 and get $2.95 off your delivery fee. Spend over $90 and get free delivery!",
+  },
+];
+
+export { CATALOGUE, DELIVERY_RULES, OFFERS, SPECIAL_OFFERS_CONTENT };

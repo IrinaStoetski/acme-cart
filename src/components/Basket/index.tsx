@@ -2,16 +2,20 @@ import Button from "../ui/Button";
 import type { Product } from "../../types/Product";
 import QuantityButton from "./helpers/components/QuantityButton";
 import { EmptyState } from "./helpers/components";
+import { twMerge } from "tailwind-merge";
+import { ShoppingCart } from "lucide-react";
+import Heading from "../ui/Heading";
 
 interface Props {
   items: Product[];
   deliveryFee: number;
   total: number;
+  className?: string;
   onRemoveItem: (code: string) => void;
   onAddItem: (code: string) => void;
 }
 
-export const Basket = ({ items, total, deliveryFee, onRemoveItem, onAddItem }: Props) => {
+export const Basket = ({ items, total, deliveryFee, onRemoveItem, onAddItem, className }: Props) => {
   const itemsMap: { [key: string]: Product & { quantity: number } } = {};
 
   items.forEach((item) => {
@@ -23,8 +27,10 @@ export const Basket = ({ items, total, deliveryFee, onRemoveItem, onAddItem }: P
   });
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 mt-4">
-      <h2 className="text-2xl w-full font-semibold mb-8 text-center">Your shopping cart</h2>
+    <div className={twMerge("border border-gray-300 rounded-lg p-4", className)}>
+      <Heading className="flex justify-center items-center gap-2 mb-6">
+        <ShoppingCart className="text-blue-300 mr-2" /> Your shopping cart
+      </Heading>
       {items.length === 0 ? (
         <EmptyState />
       ) : (
