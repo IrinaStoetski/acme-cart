@@ -1,10 +1,10 @@
-import type { Product } from "../../types/Product";
+import type { Product as ProductModel } from "../../types/Product";
 import Heading from "../ui/Heading";
-import Widget from "../Widget";
+import Product from "../Product";
 import { ListChecksIcon } from "lucide-react";
 
 interface Props {
-  items: Product[];
+  items: ProductModel[];
   onAddButtonPress: (code: string) => void;
 }
 
@@ -16,7 +16,7 @@ const Catalog = ({ onAddButtonPress, items }: Props) => (
     </Heading>
     <div className="flex flex-col gap-4 mt-4">
       {items.map((product) => (
-        <Widget
+        <Product
           key={product.code}
           imageSrc={`/images/widgets/${product.image}`}
           title={product.name}

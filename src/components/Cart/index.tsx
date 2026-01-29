@@ -22,7 +22,7 @@ const Basket = ({ items, subtotal, total, discount, deliveryFee, onRemoveItem, o
   const itemsMap = mapBasketItems(items);
 
   return (
-    <div className={twMerge("border border-gray-300 rounded-lg p-4 ", className)}>
+    <div className={twMerge("border border-gray-200 shadow-sm rounded-lg p-4 ", className)}>
       <Heading className="flex justify-center items-center gap-2 mb-6">
         <ShoppingCartIcon className="text-blue-300 mr-2" /> Your shopping cart
       </Heading>
