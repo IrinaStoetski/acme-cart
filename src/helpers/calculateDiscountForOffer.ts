@@ -1,13 +1,13 @@
-import type { Offer } from "../../types/Offer";
-import type { Product } from "../../types/Product";
+import type { Offer } from "../types/Offer";
+import type { Product } from "../types/Product";
 
 export type OfferStrategy = (items: Product[], offer: Offer) => number;
 
-export const OfferStrategies: Record<string, OfferStrategy> = {
+const OFFER_STRATEGIES: Record<string, OfferStrategy> = {
   PERCENTAGE: (items, offer) => {
     const total = items.reduce((sum, item) => sum + item.price, 0);
 
-    return total * (offer.value / 100);
+    return Math.round(total * (offer.value / 100));
   },
 
   /**
@@ -20,14 +20,22 @@ export const OfferStrategies: Record<string, OfferStrategy> = {
    */
   BOGO: (items: Product[], offer: Offer): number => {
     const eligible = items.filter((item) => item.code === offer.productCode);
-    if (eligible.length < 2) return 0;
+
+    if (eligible.length < 2) {
+      return 0;
+    }
 
     const unitPrice = eligible[0].price;
-    const count = eligible.length;
-    const freeItemsCount = Math.floor(count / 2);
+    const freeItemsCount = Math.floor(eligible.length / 2);
 
-    return freeItemsCount * (unitPrice * (offer.value || 1));
+    return Math.round(freeItemsCount * (unitPrice * (offer.value || 1)));
   },
 
   DEFAULT: () => 0,
+};
+
+export const calculateDiscountForOffer = (items: Product[], offer: Offer): number => {
+  const strategy = OFFER_STRATEGIES[offer.type] || OFFER_STRATEGIES.DEFAULT;
+
+  return strategy(items, offer);
 };
