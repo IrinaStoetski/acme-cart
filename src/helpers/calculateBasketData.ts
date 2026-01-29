@@ -11,7 +11,7 @@ type Params = {
   offers: Offer[];
 };
 
-export const calculateBasketTotal = ({ items, catalogue, deliveryRules, offerProcessor, offers }: Params) => {
+export const calculateBasketData = ({ items, catalogue, deliveryRules, offerProcessor, offers }: Params) => {
   const subtotal = items.reduce((sum, product) => {
     const catalogProduct = catalogue.find((p) => p.code === product.code);
 
@@ -26,5 +26,10 @@ export const calculateBasketTotal = ({ items, catalogue, deliveryRules, offerPro
       ? 0
       : deliveryRules.sort((a, b) => b.amountSpent - a.amountSpent).find((rule) => total >= rule.amountSpent)?.fee || 0;
 
-  return Math.floor((total + deliveryFee) * 100) / 100;
+  return {
+    subtotal,
+    discount,
+    deliveryFee,
+    total: total + deliveryFee,
+  };
 };
