@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { calculateBasketData } from "./calculateBasketData";
-import type { Product } from "../types/Product";
-import type { DeliveryRule } from "../types/DeliveryRule";
+import { calculateCartData } from "./calculateCartData";
+import type { Product } from "../../types/Product";
+import type { DeliveryRule } from "../../types/DeliveryRule";
 
-import type { Offer } from "../types/Offer";
+import type { Offer } from "../../types/Offer";
 
-describe("calculateBasketData", () => {
+describe("calculateCartData", () => {
   const catalog: Product[] = [
     { code: "R01", name: "Red Widget", price: 3295, image: "" },
     { code: "G01", name: "Green Widget", price: 2495, image: "" },
@@ -19,7 +19,7 @@ describe("calculateBasketData", () => {
   ];
 
   it("should return zeros for an empty basket", () => {
-    const result = calculateBasketData({
+    const result = calculateCartData({
       items: [],
       catalog,
       deliveryRules,
@@ -35,7 +35,7 @@ describe("calculateBasketData", () => {
   });
 
   it("should calculate correctly for a single item with no offers", () => {
-    const result = calculateBasketData({
+    const result = calculateCartData({
       items: [catalog[0]],
       catalog,
       deliveryRules,
@@ -49,7 +49,7 @@ describe("calculateBasketData", () => {
   });
 
   it("should calculate correctly for multiple items with no offers", () => {
-    const result = calculateBasketData({
+    const result = calculateCartData({
       items: [catalog[1], catalog[2]],
       catalog,
       deliveryRules,
@@ -65,7 +65,7 @@ describe("calculateBasketData", () => {
     const items = [catalog[0], catalog[0]];
     const offers: Offer[] = [{ productCode: "R01", type: "BOGO", value: 0.5 }];
 
-    const result = calculateBasketData({
+    const result = calculateCartData({
       items,
       catalog,
       deliveryRules,
@@ -79,7 +79,7 @@ describe("calculateBasketData", () => {
   });
 
   it("should apply free delivery for subtotal >= 9000", () => {
-    const result = calculateBasketData({
+    const result = calculateCartData({
       items: [catalog[0], catalog[0], catalog[0]],
       catalog,
       deliveryRules,
@@ -92,7 +92,7 @@ describe("calculateBasketData", () => {
   });
 
   it("should apply mid-tier delivery fee for subtotal >= 5000 and < 9000", () => {
-    const result = calculateBasketData({
+    const result = calculateCartData({
       items: [catalog[0], catalog[1]],
       catalog,
       deliveryRules,
