@@ -53,7 +53,7 @@ Delivery costs are calculated based on the total order value (after discounts):
 - **Testing Strategy**: The test suite focuses on high-ROI areas: the helpers and hooks that handle the core business logic. This ensures the "brain" of the application is fully verified while keeping the tests fast.
 - **Architectural Flexibility**: The application is structured such that the configuration data (currently in `src/config.ts`) can be easily swapped for data fetched from an API with minimal changes to the core logic.
 - **AI-Assisted Development**: This project leveraged AI tools for several key tasks:
-  - **Wireframe Generation**: Initial design concepts and wireframes were generated with AI assistance.
+  - **Wireframe Generation**: Initial design concepts and wireframes (in docs folder) were generated with AI assistance.
   - **Documentation**: This README and other project documentation were authored with AI help to ensure clarity and professional coverage.
   - **Test Coverage**: AI was used to help generate and refine the comprehensive unit test suite in `src/helpers/` and `src/hooks/`.
 - **Development Process**: Development was conducted using feature-specific **Git branches**, ensuring a clean commit history and modular feature implementation. All branches are saved in the public repository and can be reviewed if needed.
@@ -95,4 +95,4 @@ npm run test
 - `src/helpers`: Business logic for calculations and formatting.
 - `src/config.ts`: Central configuration for products, delivery rules, and offers.
 - `src/types`: TypeScript definitions.
-- `docs/`: Original project specifications and wireframes.
+- `docs/`: Original project specifications and AI-generated wireframe.

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import type { DeliveryRule } from "../types/DeliveryRule";
 import type { Product } from "../types/Product";
-import { calculateBasketData } from "../helpers/calculateBasketData";
+import { calculateCartData } from "../helpers/calculateCartData";
 import type { Offer } from "../types/Offer";
 
 type Params = {
@@ -31,7 +31,7 @@ export function useShoppingCart({ catalog, offers, deliveryRules }: Params) {
 
   const { total, deliveryFee, subtotal, discount } = useMemo(
     () =>
-      calculateBasketData({
+      calculateCartData({
         items,
         catalog,
         deliveryRules,
